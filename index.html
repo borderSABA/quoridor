@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <meta name="theme-color" content="#111827" />
+  <title>QUORIDOR ONLINE</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main id="app">
+    <section id="titleScreen" class="screen active">
+      <div class="title-shell">
+        <div class="title-row">
+          <div></div>
+          <div class="title-center">
+            <h1>QUORIDOR ONLINE</h1>
+            <p>壁を置くか、駒を進めるか。</p>
+          </div>
+          <div class="version">v0.1.0</div>
+        </div>
+
+        <label class="name-box">
+          <span>プレイヤー名</span>
+          <input id="nameInput" maxlength="32" autocomplete="nickname" placeholder="名前を入力" />
+        </label>
+
+        <div id="titleMessage" class="message"></div>
+        <div id="roomGrid" class="room-grid"></div>
+      </div>
+    </section>
+
+    <section id="lobbyScreen" class="screen">
+      <div class="topbar">
+        <button id="leaveLobbyBtn" class="ghost-btn">退出</button>
+        <div class="top-title">QUORIDOR ONLINE <span class="small-version">v0.1.0</span></div>
+        <div id="connectionBadge" class="badge">接続中</div>
+      </div>
+
+      <div class="lobby-wrap">
+        <div class="panel lobby-main">
+          <h2 id="lobbyRoomTitle">ROOM</h2>
+          <div id="lobbyPlayers" class="player-list"></div>
+
+          <div id="hostControls" class="host-controls">
+            <div class="control-row">
+              <span>人数</span>
+              <button data-mode="2" class="mode-btn">2人</button>
+              <button data-mode="4" class="mode-btn">4人</button>
+            </div>
+            <div class="control-row">
+              <span>CPU</span>
+              <button id="addCpuBtn">CPU追加</button>
+              <button id="removeCpuBtn">CPU削除</button>
+            </div>
+          </div>
+
+          <button id="startBtn" class="primary big-btn">ゲーム開始</button>
+          <div id="lobbyMessage" class="message"></div>
+        </div>
+
+        <div class="panel rules-panel">
+          <h3>ルール</h3>
+          <p>手番では「駒を1回動かす」か「壁を1枚置く」のどちらかを行います。</p>
+          <p>反対側の辺へ先に到達したプレイヤーの勝ちです。</p>
+          <p>壁で相手のゴール経路を完全に塞ぐことはできません。</p>
+          <p>隣接する相手駒は飛び越せます。後ろが壁なら斜めへ回り込めます。</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="gameScreen" class="screen">
+      <div class="topbar game-topbar">
+        <button id="leaveGameBtn" class="ghost-btn">退出</button>
+        <div class="game-status-center">
+          <strong id="gameRoomLabel">ROOM</strong>
+          <span id="turnLabel">手番</span>
+        </div>
+        <div id="gameConnectionBadge" class="badge">接続中</div>
+      </div>
+
+      <div class="game-layout">
+        <aside class="side-panel panel">
+          <div id="gamePlayers" class="game-player-list"></div>
+          <div class="action-mode">
+            <button id="moveModeBtn" class="action-btn active">駒移動</button>
+            <button id="wallHBtn" class="action-btn">壁 横</button>
+            <button id="wallVBtn" class="action-btn">壁 縦</button>
+          </div>
+          <div id="gameMessage" class="message"></div>
+        </aside>
+
+        <div class="board-column">
+          <div id="board" class="board" aria-label="コリドール盤面"></div>
+          <div class="goal-note">自分の駒を反対側の辺まで進めると勝利</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="resultScreen" class="screen">
+      <div class="result-wrap panel">
+        <h2>RESULT</h2>
+        <div id="winnerText" class="winner-text"></div>
+        <div id="resultPlayers" class="result-players"></div>
+        <div class="result-actions">
+          <button id="rematchBtn" class="primary">再戦</button>
+          <button id="backLobbyBtn">ロビーへ</button>
+          <button id="resultLeaveBtn" class="ghost-btn">退出</button>
+        </div>
+        <div id="resultMessage" class="message"></div>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
